@@ -145,7 +145,7 @@ Widget _text(context,_text,_icon)
        Row(
            children: <Widget>[ 
            Icon(_icon),   
-           Flexible(child: Text(_text)),
+           Flexible(child: Text(_text, style:TextStyle(color:Colors.white))),
           ]
          )
      );

@@ -521,6 +521,6 @@ Widget _header(context)
             CachedNetworkImage(
          imageUrl: 'https://www.getmonero.org/press-kit/symbols/monero-symbol-800.png',
           width:50.0,  ),
-     //    Image.asset('logo.png'),
+          Image.asset('logo.png'),
           ]));
 }
