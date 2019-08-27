@@ -48,9 +48,9 @@ appBar:_header(context) ,
        
         ],)
         ,
-               persistentFooterButtons: <Widget>[
+      persistentFooterButtons: <Widget>[
 Row(children:<Widget>[
-      Icon(Icons.language),   Text("Mobile Media Point LTD",style:TextStyle(color:Colors.blue),textAlign:TextAlign.start)
+      Icon(Icons.language),   Text("MMP LTD",style:TextStyle(color:Colors.blue),textAlign:TextAlign.start)
      ])
          ,
         new FlatButton(
@@ -127,9 +127,12 @@ Widget _header(context)
     
   ],
           title:Row(children: <Widget>[
-            CachedNetworkImage(
-         imageUrl: 'https://www.getmonero.org/press-kit/symbols/monero-symbol-800.png',
-          width:50.0,  ),
-        Text("")
+        //     CachedNetworkImage(
+        //  imageUrl: 'https://www.getmonero.org/press-kit/symbols/monero-symbol-800.png',
+        //   width:50.0,  ),
+                   Image.asset('assets/logo.png', width: 40.0, height: 40.0)
           ]));
 }
+
+
+

@@ -10,6 +10,10 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'home.dart';
 import 'dart:convert';
+import 'package:connectivity/connectivity.dart';
+import 'dart:io';
+
+
 
  
 class Data{
@@ -25,18 +29,51 @@ class Data{
 class home extends StatefulWidget{
   createState() => new homeState();
 }
+var msg="";
 
-const baseUrl = "http://zavigne.000webhostapp.com/db/0companies.php";
+class NetworkCheck {
+String msg="";
+String _status(){
+var connectivityResult = (Connectivity().checkConnectivity());
+if (connectivityResult == ConnectivityResult.mobile) {
+ Text("Connected"); 
+ msg= "Connected";
+ return  "Connected";
+} else if (connectivityResult == ConnectivityResult.wifi) {
+ Text("Connected"); 
+ msg= "Connected ";
+ return  "Connected";
+}
+else if(connectivityResult == ConnectivityResult.none)
+{
+   Text("No Internet Connection"); 
+   msg= "No Internet Connection";
+   return "No Internet Connection";
+}
+}
+
+
+
+}
+
+
+
+ 
+ const baseUrl = "http://zavigne.000webhostapp.com/db/0companies.php";
+
 //https://zavigne.000webhostapp.com/db/0public.php
 //https://zavigne.000webhostapp.com/db/0companies.php
 //https://zavigne.000webhostapp.com/db/0services.php
 
 class API {
   static Future getUsers() {
+
     var url = baseUrl;
     return http.get(url);
-  }
+   
+   }
 }
+
 
 
 
@@ -81,8 +118,11 @@ class User {
   var users3=new List<User>();
   var users4=new List<User>();
 
+  
+
   _getUsers() {
-try{
+
+
     API.getUsers().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -90,10 +130,6 @@ try{
       
       });
     });
-}catch(error){
-  print('netowk error');
-}
-
 
   }
 
@@ -145,6 +181,11 @@ try{
     _getUsers2();
     _getUsers3();
     _getUsers4();
+
+NetworkCheck n=new NetworkCheck();
+n._status();
+ msg=n._status();
+  
   }
 
   dispose() {
@@ -165,6 +206,45 @@ try{
       sliver: SliverList(
         delegate: SliverChildListDelegate(
           <Widget>[
+     
+
+        //  Text("${msg}"),
+// StreamBuilder(
+//             stream: Connectivity().onConnectivityChanged,
+//             builder: (BuildContext ctxt,
+//                 AsyncSnapshot<ConnectivityResult> snapShot) {
+//              // if (!snapShot.hasData) return CircularProgressIndicator();
+//              var connectivityResult = snapShot.data.connectivityResult;
+//               var result = snapShot.data;
+//               if(connectivityResult=ConnectivityResult.none)
+//               {
+//               return Center(child:_text(context,"No Internet Connection!"));
+//               }
+//               else if(connectivityResult=ConnectivityResult.mobile)
+//               {
+//                return Center(child: _text(context,'Welcome to home Page'));
+//               }
+//               else if(connectivityResult=ConnectivityResult.wifi)
+//               {
+//               return Center(child: _text(context,'Welcome to home Page'));
+//               }
+
+//               // switch (result) {
+//               //   case ConnectivityResult.none:
+//               //     //print("no net");
+//               //     return Center(child:_text(context,"No Internet Connection!"));
+//               //   case ConnectivityResult.mobile:
+//               //   case ConnectivityResult.wifi:
+//               //    // print("yes net");
+//               //     return Center(
+//               //       child: _text(context,'Welcome to home Page'),
+//               //     );
+//               //   default:
+//               //    return Center(child: Text("No Internet Connection!"));
+//               // }
+//             })
+      // ,
+
 
         Container(
           margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -289,7 +369,7 @@ try{
         ,
                persistentFooterButtons: <Widget>[
 Row(children:<Widget>[
-      Icon(Icons.language),   Text("Mobile Media Point LTD",style:TextStyle(color:Colors.blue),textAlign:TextAlign.start)
+      Icon(Icons.language),   Text("MMP LTD",style:TextStyle(color:Colors.blue),textAlign:TextAlign.start)
      ])
          ,
         new FlatButton(
@@ -518,9 +598,12 @@ Widget _header(context)
     
   ],
           title:Row(children: <Widget>[
-            CachedNetworkImage(
-         imageUrl: 'https://www.getmonero.org/press-kit/symbols/monero-symbol-800.png',
-          width:50.0,  ),
-          Image.asset('logo.png'),
-          ]));
+        //     CachedNetworkImage(
+        //  imageUrl: 'https://www.getmonero.org/press-kit/symbols/monero-symbol-800.png',
+        //   width:50.0,  ),
+           Image.asset('assets/logo.png',  height:44.0)
+        
+          ]),
+      automaticallyImplyLeading: false,
+          );
 }

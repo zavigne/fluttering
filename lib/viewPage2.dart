@@ -58,13 +58,26 @@ appBar: AppBar(
     )
   ],
           title:Row(children: <Widget>[
-            Image.asset('logo.png'),
+                    Image.asset('assets/logo.png',height: 44.0)
         //     CachedNetworkImage(
         //  imageUrl: 'https://www.getmonero.org/press-kit/symbols/monero-symbol-800.png',
         //   width:50.0,  ),
-        Text("")
-          ])),
-        body: Column(children: <Widget>[
+        
+          ]),
+             automaticallyImplyLeading: false,
+          ),
+        body: 
+
+  CustomScrollView(
+  shrinkWrap: false,
+  slivers: <Widget>[
+    SliverPadding(
+      padding: const EdgeInsets.all(0.0),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(
+          <Widget>[
+
+    Column(children: <Widget>[
         Container(
          decoration: new BoxDecoration(
             borderRadius: new BorderRadius.circular(0.0),
@@ -83,10 +96,15 @@ appBar: AppBar(
         _text(context, widget.data.value,Icons.add_shopping_cart),     
         Text(widget.data.description) 
         ],)
+
+          ])))]
+ )
+
+    
         ,
                persistentFooterButtons: <Widget>[
 Row(children:<Widget>[
-      Icon(Icons.language),   Text("Mobile Media Point LTD",style:TextStyle(color:Colors.blue),textAlign:TextAlign.start)
+      Icon(Icons.language),   Text("MMP LTD",style:TextStyle(color:Colors.blue),textAlign:TextAlign.start)
      ])
          ,
         new FlatButton(
